@@ -16,6 +16,9 @@ const cookbook = require('./alexa-cookbook.js');
   const FALLBACK_REPROMPT_EN = 'What can I help you with?';
   const STOP_MESSAGE_EN = 'Goodbye!';
 
+  const SKILL_NAME_EN_GB = "British Space Facts";
+  const STOP_MESSAGE_EN_GB = 'Cheerio!';
+
   const SKILL_NAME_DE = "Weltraumwissen";
   const GET_FACT_MESSAGE_DE = "Hier sind deine Fakten: ";
   const HELP_MESSAGE_DE = "Du kannst sagen, „Nenne mir einen Fakt über den Weltraum“, oder du kannst „Beenden“ sagen... Wie kann ich dir helfen?";
@@ -103,11 +106,11 @@ const GetNewFactHandler = {
       if (locale == "de-DE") {
           randomFact = DE_data[6];
           speechOutput = GET_FACT_MESSAGE_DE + randomFact;
-          nombreSkill = SKILL_NAME_DE;
+          nombreSkill = SKILL_NAME_DE
       } else if (locale == "en-US" | locale == "en-GB") {
           randomFact = EN_data[6];
           speechOutput = GET_FACT_MESSAGE_EN + randomFact;
-          nombreSkill = SKILL_NAME_EN;
+          nombreSkill = locale === "en-GB" ? SKILL_NAME_EN_GB : SKILL_NAME_EN;
       } else if (locale == "ja-JP") {
           randomFact = JP_data[6];
           speechOutput = GET_FACT_MESSAGE_JP + randomFact;
@@ -220,8 +223,9 @@ const ExitHandler = {
       .getResponse();      
     }
     else if (locale == "en-US" | locale == "en-GB") {
+      const stopMessage = locale === "en-GB" ? STOP_MESSAGE_EN_GB : STOP_MESSAGE_EN;
       return handlerInput.responseBuilder
-      .speak(STOP_MESSAGE_EN)
+      .speak(stopMessage)
       .getResponse();      
     }
     else if (locale == "ja-JP"){

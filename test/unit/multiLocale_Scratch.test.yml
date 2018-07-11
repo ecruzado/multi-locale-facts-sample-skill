@@ -52,4 +52,4 @@ configuration:
 - AMAZON.FallbackIntent:
   - response.outputSpeech.ssml: fallbackPrompt
   - response.reprompt.outputSpeech.ssml: fallbackReprompt
-- response.shouldEndSession: false
+  - response.shouldEndSession: false
